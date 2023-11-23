@@ -73,7 +73,7 @@ void Screen::display(){
     fout.open("hstatus.dat");
     for(auto h : helmet_){
         fout << h << " ";
-        if (mqtt_[h] > 300) fout << 0 << std::endl;
+        if (mqtt_[h] > 550) fout << 0 << std::endl;
         else fout << 1 << std::endl;
     }
 }

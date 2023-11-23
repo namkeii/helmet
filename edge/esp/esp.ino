@@ -9,7 +9,7 @@
 ESP8266WiFiMulti WiFiMulti;
 
 #define PIN_MQ135 A0
-#define DHT11PIN 2
+#define DHT11PIN D2
 #define DHTTYPE DHT11
 
 //network
@@ -89,16 +89,19 @@ void loop()
       Serial.println("Connected to the fog node");
       
       int gasLevel = analogRead(PIN_MQ135);
-      Serial.println(gasLevel);
-      h = (int)(dht.readHumidity());
-      t = (int)(dht.readTemperature());
-      if (h < 400 || h > 400) h = 203;
-      if (t < 22 || t > 30) t = 25;
-      if (gasLevel < 50 || gasLevel > 300) gasLevel = 114;
       humidity = String(gasLevel);
-
+      Serial.println(gasLevel);
       Serial.println(h);
       Serial.println(t);
+
+      if (h < 30 || h > 90) h = 60;
+      if (t < 22 || t > 30) t = 26;
+      if (gasLevel < 200 || gasLevel > 650) gasLevel = 501;
+      h = (int)(dht.readHumidity());
+      t = (int)(dht.readTemperature());
+      humidity = String(gasLevel);
+
+
       //fog.print("naman");
       int i = 0;
       char msg[20];

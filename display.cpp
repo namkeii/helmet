@@ -10,6 +10,7 @@
 #include <fstream>
 #include <unistd.h>
 using namespace std;
+bool halert = false;
 
 void update();
 int main(){
@@ -47,8 +48,8 @@ void update(){
 		char hstatus = temp[2];
 		if (hstatus == '0') isSafe = false;
 		string hsp;
-		if(hstatus == '1') hsp = "\033[1;32mSAFE\033[0m\n";
-		else hsp = "\033[1;31mUNSAFE\033[0m\n";
+		if(!halert && hstatus == '1') hsp = "\033[1;32mSAFE\033[0m\n";
+		else{ hsp = "\033[1;31mUNSAFE\033[0m\n"; halert = true;}
 		cout << setfill(' ') << fixed;
 		cout << setprecision(0) << setw(colWidth) << (char)hid << "\t\t" << hsp << endl;
 	}
